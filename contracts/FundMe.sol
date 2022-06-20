@@ -3,6 +3,7 @@ pragma solidity ^0.8.8;
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
+import "hardhat/console.sol";
 
 error FundMe__NotOwner();
 
@@ -30,15 +31,16 @@ contract FundMe {
     constructor(address priceFeedAddress) {
         owner = msg.sender;
         priceFeed = AggregatorV3Interface(priceFeedAddress);
+        console.log("RUN CONSTRUCTORR");
     }
 
-    receive() external payable {
-        fund();
-    }
+    // receive() external payable {
+    //     fund();
+    // }
 
-    fallback() external payable {
-        fund();
-    }
+    // fallback() external payable {
+    //     fund();
+    // }
 
     /// @notice This function funds this contract
     /// @dev This implements price feeds as our library

@@ -61,20 +61,12 @@ module.exports = {
                     ? [process.env.PRIVATE_KEY]
                     : [],
         },
-        mumbai: {
+        polygonMumbai: {
             url: POLYGON_MUMBAI_RPC_URL,
             accounts: [PRIVATE_KEY],
             chainId: 80001,
-            blockConfirmations: 10,
+            blockConfirmations: 20,
         },
-    },
-    gasReporter: {
-        enabled: false,
-        outputFile: "gas-report.txt",
-        noColors: true,
-        currency: "USD",
-        coinmarketcap: COINMARKETCAP_API_KEY,
-        token: "ETH",
     },
     etherscan: {
         apiKey: {
@@ -84,6 +76,14 @@ module.exports = {
             kovan: ETHERSCAN_API_KEY,
             polygonMumbai: POLYGONSCAN_API_KEY,
         },
+    },
+    gasReporter: {
+        enabled: false,
+        outputFile: "gas-report.txt",
+        noColors: true,
+        currency: "USD",
+        coinmarketcap: COINMARKETCAP_API_KEY,
+        token: "ETH",
     },
     namedAccounts: {
         deployer: {

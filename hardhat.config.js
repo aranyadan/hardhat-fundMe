@@ -4,6 +4,7 @@ require("@nomiclabs/hardhat-etherscan")
 require("@nomiclabs/hardhat-waffle")
 require("hardhat-gas-reporter")
 require("solidity-coverage")
+require("hardhat-deploy")
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -24,14 +25,19 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 const RINKEBY_RPC_URL =
     process.env.RINKEBY_RPC_URL || "https://eth-rinkeby/example"
-const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || "0xkey"
+const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || "https://goerli"
+const POLYGON_MUMBAI_RPC_URL =
+    process.env.POLYGON_MUMBAI_RPC_URL || "https://mumbai"
 const LOCALHOST_RPC_URL = process.env.LOCALHOST_RPC_URL || "https://127.0.0.1"
 const PRIVATE_KEY = process.env.METAMASK_PRIVATE_KEY || "0xkey"
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "key"
+const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "key"
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "key"
 
 module.exports = {
-    solidity: "0.8.7",
+    solidity: {
+        compilers: [{ version: "0.8.8" }, { version: "0.6.6" }],
+    },
     networks: {
         localhost: {
             url: LOCALHOST_RPC_URL,
@@ -41,6 +47,7 @@ module.exports = {
             url: RINKEBY_RPC_URL,
             accounts: [PRIVATE_KEY],
             chainId: 4,
+            blockConfirmations: 3,
         },
         goerli: {
             url: GOERLI_RPC_URL,
@@ -54,6 +61,12 @@ module.exports = {
                     ? [process.env.PRIVATE_KEY]
                     : [],
         },
+        mumbai: {
+            url: POLYGON_MUMBAI_RPC_URL,
+            accounts: [PRIVATE_KEY],
+            chainId: 80001,
+            blockConfirmations: 10,
+        },
     },
     gasReporter: {
         enabled: false,
@@ -64,6 +77,20 @@ module.exports = {
         token: "MATIC",
     },
     etherscan: {
-        apiKey: ETHERSCAN_API_KEY,
+        apiKey: {
+            mainnet: ETHERSCAN_API_KEY,
+            rinkeby: ETHERSCAN_API_KEY,
+            goerli: ETHERSCAN_API_KEY,
+            kovan: ETHERSCAN_API_KEY,
+            polygonMumbai: POLYGONSCAN_API_KEY,
+        },
+    },
+    namedAccounts: {
+        deployer: {
+            default: 0,
+        },
+        user: {
+            default: 0,
+        },
     },
 }

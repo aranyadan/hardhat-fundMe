@@ -25,6 +25,8 @@ const { developmentChains } = require("../../helper-hardhat-config")
           describe("Constructor", async function () {
               it("Sets the aggregator addresses correctly", async function () {
                   const response = await fundMe.getPriceFeed()
+                  const ownerResponse = await fundMe.getOwner()
+                  assert.equal(ownerResponse, deployer)
                   assert.equal(response, mockV3Aggregator.address)
               })
           })

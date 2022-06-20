@@ -1,5 +1,7 @@
 {
-  "name": "hardhat-project",
+  "name": "hardhat-fundme",
+  "auther": "aranya",
+  "version": "1.0.0",
   "devDependencies": {
     "@chainlink/contracts": "^0.3.1",
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
@@ -13,6 +15,7 @@
     "hardhat-deploy": "^0.11.10",
     "hardhat-gas-reporter": "^1.0.8",
     "prettier-plugin-solidity": "^1.0.0-beta.19",
+    "solhint": "^3.3.6",
     "solidity-coverage": "^0.7.16"
   },
   "scripts": {
@@ -21,6 +24,7 @@
     "lint": "solhint 'contracts/*.sol'",
     "lint:fix": "solhint 'contracts/**/*.sol' --fix",
     "format": "prettier --write .",
-    "coverage": "hardhat coverage"
+    "coverage": "hardhat coverage",
+    "deploy": "hardhat deploy"
   }
 }
